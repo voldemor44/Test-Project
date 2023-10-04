@@ -106,11 +106,9 @@
                                 <span></span>
                             </div>
                             <ul>
-                                <li><a href="#">Accueil</a></li>
                                 <li><a href="#">A propos</a></li>
                                 <li><a href="#">Evenements</a></li>
                                 <li><a href="#">Actualités</a></li>
-                                <li><a href="#">Contacts</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -125,7 +123,7 @@
         <div class="swiper-container hero-slider">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" data-date="2018/05/01"
-                    style="background: url({{ asset('assets/images/header-bg.jpg') }}) no-repeat">
+                    style="margin-top: -6%; background: url({{ asset('assets/images/red1.jpg') }}) no-repeat">
                     <div class="hero-content">
                         <div class="container">
                             <div class="row">
@@ -133,27 +131,20 @@
                                     <div class="entry-header">
                                         <h2 class="entry-title">Réservez vos moments <br> mémorables en un clic.</h2>
                                     </div>
-                                    <div class="entry-footer">
-                                        <a class="btn gradient-bg" href="#">Order here</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="swiper-slide" data-date="2019/05/01"
-                    style="background: url({{ asset('assets/images/header-bg.jpg') }}) no-repeat">
+                    style="margin-top: -6%; background: url({{ asset('assets/images/header-bg.jpg') }}) no-repeat">
                     <div class="hero-content">
                         <div class="container">
                             <div class="row">
                                 <div class="col flex flex-column justify-content-center">
                                     <div class="entry-header">
-
                                         <h2 class="entry-title">Voulez-vous participer à un événement ? Acheter votre
                                             ticket ici.</h2>
-                                    </div>
-                                    <div class="entry-footer">
-                                        <a class="btn gradient-bg" href="#">Order here</a>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +152,7 @@
                     </div>
                 </div>
                 <div class="swiper-slide" data-date="2020/05/01"
-                    style="background: url({{ asset('assets/images/header-bg.jpg') }}) no-repeat">
+                    style="margin-top: -6%; background: url({{ asset('assets/images/header-bg.jpg') }}) no-repeat">
                     <div class="hero-content">
                         <div class="container">
                             <div class="row">
@@ -170,17 +161,12 @@
 
                                         <h2 class="entry-title"> Mettez-vous au parfum des événements.</h2>
                                     </div>
-                                    <div class="entry-footer">
-                                        <a class="btn gradient-bg" href="#">Order here</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="swiper-pagination"></div>
 
             <div class="swiper-button-next flex justify-content-center align-items-center">
                 <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -196,208 +182,19 @@
             </div>
         </div>
     </header>
-    <div class="homepage-info-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4 col-lg-5">
-                    <figure>
-                        <img src="{{ asset('assets/images/logo-2.png') }}" alt="logo">
-                    </figure>
-                </div>
-                <div class="col-12 col-md-8 col-lg-7">
-                    <header class="entry-header">
-                        <h2 class="entry-title">Qu’est-ce qu’Agenda et pourquoi choisir nos services ?</h2>
-                    </header>
-                    <div class="entry-content">
-                        <p>Vestibulum eget lacus at mauris sagittis varius. Etiam ut venenatis dui. Nullam tellus risus,
-                            pellentesque at facilisis et, scelerisque sit amet metus. Duis vel semper turpis, ac tempus
-                            libero. Maecenas id ultrices risus. Aenean nec ornare ipsum, lacinia volutpat urna. Maecenas
-                            ut aliquam purus, quis sodales dolor.</p>
-                    </div>
-                    <footer class="entry-footer">
-                        <a href="#" class="btn gradient-bg">Lire plus</a>
-                        <a href="#" class="btn dark">Inscrivez-vous</a>
-                    </footer>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="homepage-featured-events">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="featured-events-wrap flex flex-wrap justify-content-between">
-                        <div class="event-content-wrap positioning-event-1">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/1.jpg') }}" alt="1"></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">Michael Smith in concert</h3>
-                                <div class="posted-date">August 25</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-2">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/2.jpg') }}" alt></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">Street art fest</h3>
-                                <div class="posted-date">November 28</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-3">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/3.jpg') }}" alt></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">Anabelle in concert</h3>
-                                <div class="posted-date">August 28</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-4 half">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/events-in-london.jpg') }}"
-                                        alt></a>
-                            </figure>
-                        </div>
-                        <div class="event-content-wrap positioning-event-5 half">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/check-july.png') }}" alt></a>
-                            </figure>
-                        </div>
-                        <div class="event-content-wrap positioning-event-6 half">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/summer-festivals.jpg') }}"
-                                        alt></a>
-                            </figure>
-                        </div>
-                        <div class="event-content-wrap positioning-event-7">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/90.jpg') }}" alt></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">90’s Disco Night</h3>
-                                <div class="posted-date">August 28</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-8">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/modern.jpg') }}"
-                                        alt="1"></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">Modern Ballet</h3>
-                                <div class="posted-date">August 25</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-9">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/smoke.jpg') }}" alt></a>
-                            </figure>
-                            <header class="entry-header">
-                                <h3 class="entry-title">Smoke show</h3>
-                                <div class="posted-date">August 28</div>
-                            </header>
-                        </div>
-                        <div class="event-content-wrap positioning-event-10 half">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/summer-festival.jpg') }}"
-                                        alt></a>
-                            </figure>
-                        </div>
-                        <div class="event-content-wrap positioning-event-11 half">
-                            <figure>
-                                <a href="#"><img src="{{ asset('assets/images/autumn.jpg') }}" alt></a>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="homepage-next-events">
-        <div class="container">
-            <div class="row">
-                <div class="next-events-section-header">
-                    <h2 class="entry-title">Our next events</h2>
-                    <p>Vestibulum eget lacus at mauris sagittis varius. Etiam ut venenatis dui. Nullam tellus risus,
-                        pellentesque at facilisis et, scelerisque sit amet metus. Duis vel semper turpis, ac tempus
-                        libero. Maecenas id ultrices risus. Aenean nec ornare ipsum, lacinia.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="next-event-wrap">
-                        <figure>
-                            <a href="#"><img src="{{ asset('assets/images/next1.jpg') }}" alt="1"></a>
-                            <div class="event-rating">8.9</div>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">U2 Concert in Detroitt</h3>
-                            <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
-                        </header>
-                        <div class="entry-content">
-                            <p>Vestibulum eget lacus at mauris sagittis varius. Etiam ut venenatis dui. Nullam tellus
-                                risus.</p>
-                        </div>
-                        <footer class="entry-footer">
-                            <a href="#">Buy Tikets</a>
-                        </footer>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="next-event-wrap">
-                        <figure>
-                            <a href="#"><img src="{{ asset('assets/images/next1.jpg') }}" alt="1"></a>
-                            <div class="event-rating">7.9</div>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">TED Talk California</h3>
-                            <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
-                        </header>
-                        <div class="entry-content">
-                            <p>Eget lacus at mauris sagittis varius. Etiam ut ven enatis dui. Nullam tellus risus,
-                                pellentesque.</p>
-                        </div>
-                        <footer class="entry-footer">
-                            <a href="#">Buy Tikets</a>
-                        </footer>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="next-event-wrap">
-                        <figure>
-                            <a href="#"><img src="{{ asset('assets/images/next1.jpg') }}" alt="1"></a>
-                            <div class="event-rating">9.9</div>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">Ultra Music Miami</h3>
-                            <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
-                        </header>
-                        <div class="entry-content">
-                            <p>Lacus at mauris sagittis varius. Etiam ut venenatis dui. Nullam tellus risus,
-                                pellentesque at facili.</p>
-                        </div>
-                        <footer class="entry-footer">
-                            <a href="#">Buy Tikets</a>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="homepage-regional-events">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <header
                         class="regional-events-heading entry-header flex flex-wrap justify-content-between align-items-center">
-                        <h2 class="entry-title">Events in New York</h2>
+                        <h4 class="entry-title">Choisissez un genre d'évènement</h4>
                         <div class="select-location">
-                            <select>
-                                <option>New York</option>
-                                <option>California</option>
-                                <option>South Carolina</option>
+                            <select aria-placeholder="">
+                                <option>Les genres</option>
+                                <option>Sports</option>
+                                <option>Musique</option>
                             </select>
                         </div>
                     </header>
@@ -407,7 +204,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-1.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">U2 Concert </h2>
@@ -420,7 +217,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-2.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">Broadway Hit </h2>
@@ -433,7 +230,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-3.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">Gallery Exibition</h2>
@@ -446,7 +243,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-4.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">Art Gallery</h2>
@@ -459,7 +256,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-5.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">Music Concert</h2>
@@ -472,7 +269,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-6.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">EDM Festival</h2>
@@ -485,7 +282,7 @@
                                 <figure>
                                     <img src="{{ asset('assets/images/event-slider-1.jpg') }}" alt>
                                     <a class="event-overlay-link flex justify-content-center align-items-center"
-                                        href="#">+</a>
+                                        href="#"></a>
                                 </figure>
                                 <div class="entry-header">
                                     <h2 class="entry-title">U2 Concert </h2>
@@ -509,88 +306,124 @@
                                 </svg></span>
                         </div>
                     </div>
-                    <div class="events-partners">
-                        <header class="entry-header">
-                            <h2 class="entry-title">Partners</h2>
-                        </header>
-                        <div class="events-partners-logos flex flex-wrap justify-content-between align-items-center">
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/pixar.png') }}" alt></a>
+
+                    <div class="swiper-container homepage-regional-events-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-1.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">U2 Concert </h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/the-pirate.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-2.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Broadway Hit </h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/himalayas.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-3.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Gallery Exibition</h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/sa.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-4.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Art Gallery</h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/south-porth.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-5.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">Music Concert</h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/himalayas.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-6.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">EDM Festival</h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/sa.png') }}" alt></a>
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ asset('assets/images/event-slider-1.jpg') }}" alt>
+                                    <a class="event-overlay-link flex justify-content-center align-items-center"
+                                        href="#"></a>
+                                </figure>
+                                <div class="entry-header">
+                                    <h2 class="entry-title">U2 Concert </h2>
+                                </div>
+                                <div class="entry-footer">
+                                    <div class="posted-date">Saturday <span>Jan 27, 2018</span></div>
+                                </div>
                             </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/south-porth.png') }}" alt></a>
-                            </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/pixar.png') }}" alt></a>
-                            </div>
-                            <div class="event-partner-logo">
-                                <a href="#"><img src="{{ asset('assets/images/the-pirate.png') }}" alt></a>
-                            </div>
+                        </div>
+
+                        <div class="swiper-button-next flex justify-content-center align-items-center">
+                            <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1171 960q0 13-10 23l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23z" />
+                                </svg></span>
+                        </div>
+                        <div class="swiper-button-prev flex justify-content-center align-items-center">
+                            <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1203 544q0 13-10 23l-393 393 393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z" />
+                                </svg></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="newsletter-subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <header class="entry-header">
-                        <h2 class="entry-title">Subscribe to our newsletter to get the latest trends & news</h2>
-                        <p>Join our database NOW!</p>
-                    </header>
-                    <div class="newsletter-form">
-                        <form class="flex flex-wrap justify-content-center align-items-center">
-                            <div class="col-md-12 col-lg-3">
-                                <input type="text" placeholder="Name">
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <input type="email" placeholder="Your e-mail">
-                            </div>
-                            <div class="col-md-12 col-lg-3">
-                                <input class="btn gradient-bg" type="submit" value="Subscribe">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <footer class="site-footer">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <figure class="footer-logo">
-                        <a href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></a>
-                    </figure>
-                    <nav class="footer-navigation">
-                        <ul class="flex flex-wrap justify-content-center align-items-center">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Events</a></li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </nav>
 
                     Copyright &copy;
                     <script>

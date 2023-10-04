@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "datatables.net": "^1.13.4"
+        "datatables.net": "^1.13.4",
+        "firebase": "^10.4.0"
     }
 }

@@ -105,17 +105,17 @@ a:active {
 .btn.gradient-bg {
     padding: 18px 46px;
     border: 0;
-    background: -moz-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -moz-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(88, 20, 121, 1)), color-stop(100%, rgba(171, 0, 229, 1)));
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgb(229, 0, 23)), color-stop(100%, rgb(231, 119, 119)));
     /* safari4+,chrome */
-    background: -webkit-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -webkit-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -o-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* opera 11.10+ */
-    background: -ms-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -ms-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* ie10+ */
-    background: linear-gradient(270deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: linear-gradient(270deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#581479', endColorstr='#ab00e5', GradientType=1);
     /* ie6-9 */
@@ -373,7 +373,7 @@ a:active {
     margin-top: -21px;
     border: 2px solid #fff;
     border-radius: 50%;
-    background: #9a28d7;
+    background:rgb(231, 119, 119);
     transition: all .35s;
 }
 
@@ -889,14 +889,15 @@ a:active {
 # Homepage - Regional Events
 --------------------------------------------------------------*/
 .homepage-regional-events {
+    margin-top: -20%;
     min-height: 1500px;
     padding-top: 280px;
-    background: url("../images/regional-events-bg.jpg") no-repeat;
+    background: url("../images/red1.jpg") no-repeat;
     background-size: cover;
 }
 
 .homepage-regional-events .regional-events-heading .entry-title {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     color: #fff;
 }
@@ -908,17 +909,17 @@ a:active {
     border-radius: 50px;
     font-size: 18px;
     font-weight: bold;
-    background: -moz-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -moz-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* ff3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(88, 20, 121, 1)), color-stop(100%, rgba(171, 0, 229, 1)));
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgb(229, 0, 23)), color-stop(100%, rgb(231, 119, 119)));
     /* safari4+,chrome */
-    background: -webkit-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -webkit-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -o-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* opera 11.10+ */
-    background: -ms-linear-gradient(180deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: -ms-linear-gradient(180deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* ie10+ */
-    background: linear-gradient(270deg, rgba(171, 0, 229, 1) 0%, rgba(88, 20, 121, 1) 100%);
+    background: linear-gradient(270deg, rgb(229, 0, 23) 0%, rgb(231, 119, 119) 100%);
     /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#581479', endColorstr='#ab00e5', GradientType=1);
     /* ie6-9 */
@@ -2192,7 +2193,7 @@ ul.tabs-nav .tab-nav.active {
     margin-top: -21px;
     border: 2px solid #fff;
     border-radius: 50%;
-    background: #9a28d7;
+    background: rgb(229, 0, 23);
     transition: all .35s;
     cursor: pointer;
 

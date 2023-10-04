@@ -28,12 +28,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../images/red1.jpg') no-repeat;
+    background:  #faefef;
 }
 
 .wrapper {
     width: 420px;
-    background: #ff752b58;
+    background: rgb(195, 52, 36);
     color: #fff;
     margin-top: 5%;
     margin-bottom: 5%;
