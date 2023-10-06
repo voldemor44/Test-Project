@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'id',
+        'nom',
+        'prenoms',
+        'genre',
         'email',
-        'password',
+        'telephone',
+        'nombre_tickets',
+        'password'
     ];
 
     /**
@@ -41,4 +46,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles');
+    }
+
+    public function evenements()
+    {
+        return $this->belongsToMany('App\Models\Evenement', 'evenement_scanners', 'user_id', 'evenement_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany('App\Models\Ticket', 'scanner_id');
+    }
 }

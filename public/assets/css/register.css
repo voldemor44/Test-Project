@@ -95,6 +95,10 @@ select::-ms-expand {
     color: #fff;
 }
 
+.input-box input{
+    color: #fff;
+}
+
 .input-box i {
     position: absolute;
     right: 6%;

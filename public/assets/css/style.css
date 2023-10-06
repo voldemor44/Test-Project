@@ -316,7 +316,7 @@ a:active {
 # Buy Tickets
 --------------------------------*/
 .site-header .buy-tickets {
-    margin-right: 45px;
+
     text-align: right;
 }
 
@@ -373,7 +373,7 @@ a:active {
     margin-top: -21px;
     border: 2px solid #fff;
     border-radius: 50%;
-    background:rgb(231, 119, 119);
+    background: rgb(231, 119, 119);
     transition: all .35s;
 }
 
@@ -1000,6 +1000,10 @@ a:active {
 .event-overlay-link:hover {
     text-decoration: none;
     color: #fff;
+}
+
+.swiper-container .swiper-wrapper .swiper-slide .image-container img{
+   object-fit: cover;
 }
 
 .homepage-regional-events-slider .swiper-slide:hover .event-overlay-link {

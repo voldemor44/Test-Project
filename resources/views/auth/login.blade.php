@@ -62,12 +62,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}" type="text/css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('assets/css/boxicons.min.css') }}" type="text/css">
 </head>
 
 <body>
     <div class="wrapper">
-        <form action="" method="post">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
             <h1>Connexion</h1>
 
@@ -77,7 +77,7 @@
             </div>
 
             <div class="input-box">
-                <input type="password" name="pswd" placeholder="Mot de passe" required>
+                <input type="password" name="password" placeholder="Mot de passe" required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
 

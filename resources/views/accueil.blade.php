@@ -97,24 +97,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 col-lg-7 order-3 order-lg-2">
-                        <nav class="site-navigation">
-                            <div class="hamburger-menu d-lg-none">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                    <div class="col-lg-6 d-none d-lg-block order-2 order-lg-3" style="margin-left: 32%">
+                        <div class="row">
+                            <div class="col">
+                                <div class="buy-tickets" style="margin-right: -30%">
+                                    <a class="btn gradient-bg" href="{{ route('register') }}">S'inscrire'</a>
+                                </div>
                             </div>
-                            <ul>
-                                <li><a href="#">A propos</a></li>
-                                <li><a href="#">Evenements</a></li>
-                                <li><a href="#">Actualités</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-lg-3 d-none d-lg-block order-2 order-lg-3">
-                        <div class="buy-tickets">
-                            <a class="btn gradient-bg" href="{{ route('login') }}">Se connecter</a>
+                            <div class="col">
+                                <div class="buy-tickets">
+                                    <a class="btn gradient-bg" href="{{ route('login') }}">Se connecter</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

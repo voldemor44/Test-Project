@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('genre_id')->constrained();
+            $table->string('nom');
+            $table->text('description');
+            $table->string('adresse');
+            $table->date('date_heure');
+            $table->json('contacts')->nullable();
+            $table->string('logo_url')->nullable();
+            $table->integer('nombre_places');
+            $table->string('statut')->default('à venir');
             $table->timestamps();
         });
     }

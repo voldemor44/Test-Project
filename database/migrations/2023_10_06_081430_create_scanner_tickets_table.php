@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('scanner_tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('ticket_id')->constrained();
+            $table->boolean('scan_success');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('scanner_tickets');
     }
 };

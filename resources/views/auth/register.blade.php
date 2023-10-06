@@ -134,7 +134,7 @@
             </div>
 
             <div class="input-box">
-                <input type="text" name="prenom" placeholder="Prénoms" required>
+                <input type="text" name="prenoms" placeholder="Prénoms" required>
                 <i class='bx bx-user-circle'></i>
             </div>
 
@@ -144,12 +144,12 @@
             </div>
 
             <div class="input-box">
-                <input type="text" name="email" placeholder="Téléphone" required>
+                <input type="text" name="tel" placeholder="Téléphone" required>
                 <i class='bx bx-phone'></i>
             </div>
 
             <div class="input-box">
-                <select name="" id="">
+                <select name="genre" id="">
                     <option>Genre</option>
                     <option value="M">Masculin</option>
                     <option value="F">Féminin</option>
@@ -157,7 +157,7 @@
             </div>
 
             <div class="input-box">
-                <input type="text" name="email" placeholder="Mot de passe" required>
+                <input type="text" name="pwd" placeholder="Mot de passe" required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
 

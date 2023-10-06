@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,19 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(RolesSeeder::class);
+
+        \App\Models\User::factory(10)->create();
+
+        $this->call(UserRoleSeeder::class);
+
+        $this->call(GenreSeeder::class);
+
+        $this->call(EvenementSeeder::class);
+
+        $this->call(TypeSeeder::class);
+
+        $this->call(TicketSeeder::class);
+        
     }
 }

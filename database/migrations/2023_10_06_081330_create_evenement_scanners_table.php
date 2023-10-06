@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('evenement_scanners', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('evenement_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->integer('scan_bad');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('evenement_scanners');
     }
 };
