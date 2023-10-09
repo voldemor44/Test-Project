@@ -55,6 +55,28 @@ class ScannerController extends Controller
     }
 
 
+
+    public function modifyPassword($scanner_id, Request $request)
+    {
+        $scanner = User::findOrFail($scanner_id);
+        $request->validate([
+            "password" => 'required'
+        ]);
+
+        $password = $request->input("password");
+
+        $scanner->update([
+            'password' => $password
+        ]);
+
+        $response = [
+            "modified" => true,
+            "new_password" => $password
+        ];
+
+        return response()->json($response);
+    }
+
     public function toConnectScanner(Request $request)
     {
 

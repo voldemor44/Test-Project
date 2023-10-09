@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Ticket', 'user_id');
     }
+
+    public function token()
+    {
+        return $this->hasOne(Token::class);
+    }
 }
