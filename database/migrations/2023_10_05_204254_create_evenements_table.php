@@ -20,9 +20,10 @@ return new class extends Migration
             $table->text('description');
             $table->string('adresse');
             $table->date('date_heure');
-            $table->json('contacts')->nullable();
+            $table->string('contacts')->nullable();
             $table->string('logo_url')->nullable();
-            $table->integer('nombre_places');
+            $table->integer('nbr_places_prevu');
+            $table->integer('nbr_tickets_achat')->nullable();
             $table->string('statut')->default('à venir');
             $table->timestamps();
         });

@@ -9,7 +9,21 @@ class Evenement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'created_at', 'updated_at', 'nom', 'adresse', 'logo_url', 'date_heure', 'contacts', 'nombre_participants', 'genre_id'];
+    protected $fillable = [
+        'id',
+        'genre_id',
+        'nom',
+        'description',
+        'adresse',
+        'logo_url',
+        'date_heure',
+        'contacts',
+        'nbr_places_prevu',
+        'statut',
+        'nbr_tickets_achat',
+        'created_at',
+        'updated_at',
+    ];
 
     public function genre()
     {

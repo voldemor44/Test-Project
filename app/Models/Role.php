@@ -16,8 +16,8 @@ class Role extends Model
     /**
      * @var array
      */
-    
-    protected $fillable = ['id', 'created_at', 'updated_at', 'nom'];
+
+    protected $fillable = ['id', 'nom', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

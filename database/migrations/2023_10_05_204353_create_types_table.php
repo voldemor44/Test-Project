@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evenement_id')->constrained();
             $table->string('nom');
-            $table->text('privileges');
+            $table->text('privileges')->nullable();
             $table->integer('prix');
             $table->timestamps();
         });

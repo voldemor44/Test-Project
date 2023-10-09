@@ -9,7 +9,7 @@ class Genre extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'created_at', 'updated_at', 'nom'];
+    protected $fillable = ['id', 'nom', 'created_at', 'updated_at'];
 
     public function evenements()
     {

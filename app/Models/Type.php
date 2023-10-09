@@ -9,7 +9,15 @@ class Type extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'evenement_id', 'privileges ', 'prix', 'created_at', 'updated_at', 'nom'];
+    protected $fillable = [
+        'id',
+        'evenement_id',
+        'nom',
+        'privileges ',
+        'prix',
+        'created_at',
+        'updated_at'
+    ];
 
     public function tickets()
     {

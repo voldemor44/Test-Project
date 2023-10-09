@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evenement_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->integer('scan_bad');
+            $table->integer('nbr_total_scan')->nullable()->default(0);
+            $table->integer('nbr_success_scan')->nullable()->default(0);
+            $table->integer('nbr_failed_scan')->nullable()->default(0);
             $table->timestamps();
         });
     }

@@ -12,7 +12,16 @@ class EvenementScanner extends Model
     /**
      * @var array
      */
-    protected $fillable = ['id', 'evenement_id', 'user_id'];
+    protected $fillable = [
+        'id',
+        'evenement_id',
+        'user_id',
+        'nbr_total_scan',
+        'nbr_success_scan',
+        'nbr_failed_scan',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

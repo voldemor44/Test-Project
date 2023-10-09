@@ -24,8 +24,9 @@ class User extends Authenticatable
         'genre',
         'email',
         'telephone',
-        'nombre_tickets',
-        'password'
+        'password',
+        'achat_tickets_nbr',
+        'nbr_event_scan',
     ];
 
     /**
@@ -59,6 +60,6 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasMany('App\Models\Ticket', 'scanner_id');
+        return $this->hasMany('App\Models\Ticket', 'user_id');
     }
 }

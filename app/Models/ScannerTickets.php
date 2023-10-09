@@ -9,7 +9,7 @@ class ScannerTickets extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'ticket_id', 'user_id'];
+    protected $fillable = ['id', 'ticket_id', 'user_id', 'scan_success'];
 
     public function scanner()
     {

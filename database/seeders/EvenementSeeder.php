@@ -23,7 +23,7 @@ class EvenementSeeder extends Seeder
                     'description' => fake()->text(),
                     'adresse' => fake()->address,
                     'date_heure' => fake()->date(),
-                    'nombre_places' => rand(40, 300),
+                    'nbr_places_prevu' => rand(40, 300),
                     'created_at' => now(),
                     'updated_at' => now()
                 ],

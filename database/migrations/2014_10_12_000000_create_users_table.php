@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('telephone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->unique();
-            $table->integer('nbr_tickets_achat')->nullable();
-            $table->integer('nbr_event_scan')->nullable();
+            $table->integer('achat_tickets_nbr')->nullable()->default(0);
+            $table->integer('nbr_event_scan')->nullable()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

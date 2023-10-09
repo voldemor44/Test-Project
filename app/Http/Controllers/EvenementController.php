@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class EvenementController extends Controller
 {
+
+    public function allEeventlist()
+    {
+
+        $all_events = Evenement::all();
+
+        return response()->json($all_events);
+    }
 
     public function store(Request $request)
     {
@@ -22,7 +31,6 @@ class EvenementController extends Controller
             'logo_url' => 'required',
         ]);
 
-        $contacts = explode(' ', $request->contacts);
 
         $evenement = Evenement::create([
             'genre_id' => $request->genre,
@@ -30,17 +38,37 @@ class EvenementController extends Controller
             'description' => $request->description,
             'date_heure' => $request->date_heure,
             'adresse' => $request->adresse,
-            'contacts' => $contacts,
+            'contacts' => $request->contacts,
             'logo_url' => $request->logo_url,
-            'nombre_participants' => $request->nbr_p
+            'nbr_places_prevu' => $request->nbr_p
         ]);
 
-        return redirect()->back();
+        $response = [
+            'created' => true,
+            'message' => "Evenement créé avec succès",
+            'event' => $evenement
+        ];
+
+        return response()->json($response);
     }
 
-    public function update(Request $request, $id)
+
+    public function showEvent($eventId)
     {
-        $evenement = Evenement::findOrFail($id);
+        $event = Evenement::findOrFail($eventId);
+        $typeTicket_event = Type::where('evenement_id', $event->id)->get();
+
+        $response = [
+            'event' => $event,
+            'typeTicket' => $typeTicket_event
+        ];
+        return response()->json($response);
+    }
+
+
+    public function update($eventId, Request $request)
+    {
+        $evenement = Evenement::findOrFail($eventId);
 
         // Récupération des données envoyées depuis le formulaire
         $genre_id = $request->genre;
@@ -50,66 +78,76 @@ class EvenementController extends Controller
         $adresse = $request->adresse;
         $contacts = $request->contacts;
         $logo_url = $request->logo_url;
-        $nombre_participants = $request->nbr_p;
+        $nbr_places_prevu = $request->nbr_p;
 
-        if ($genre_id != $evenement->genre_id) {
+        if ($genre_id !== null && $genre_id !== $evenement->genre_id) {
             $evenement->update([
                 'genre_id' => $genre_id
             ]);
         }
 
-        if ($nom != $evenement->nom) {
+        if ($nom !== null && $nom !== $evenement->nom) {
             $evenement->update([
                 'nom' => $nom
             ]);
         }
 
-        if ($description != $evenement->description) {
+        if ($description !== null && $description !== $evenement->description) {
             $evenement->update([
                 'description' => $description
             ]);
         }
 
-        if ($date_heure != $evenement->date_heure) {
+        if ($date_heure !== null && $date_heure !== $evenement->date_heure) {
             $evenement->update([
                 'date_heure' => $date_heure
             ]);
         }
 
-        if ($adresse != $evenement->adresse) {
+        if ($adresse !== null && $adresse !== $evenement->adresse) {
             $evenement->update([
                 'adresse' => $adresse
             ]);
         }
 
-        if ($contacts != $evenement->contacts) {
+        if ($contacts !== null && $contacts !== $evenement->contacts) {
             $evenement->update([
                 'contacts' => $contacts
             ]);
         }
 
-        if ($logo_url != $evenement->logo_url) {
+        if ($logo_url !== null && $logo_url !== $evenement->logo_url) {
             $evenement->update([
                 'logo_url' => $logo_url
             ]);
         }
 
-        if ($nombre_participants != $evenement->nombre_participants) {
+        if ($nbr_places_prevu !== null && $nbr_places_prevu !== $evenement->nbr_places_prevu) {
             $evenement->update([
-                'nombre_participants' => $nombre_participants
+                'nbr_places_prevu' => $nbr_places_prevu
             ]);
         }
 
-        return redirect()->back();
+        $response = [
+            'updated' => true,
+            'message' => "Evenement modifié avec succès",
+            'eventUpdated' => $evenement,
+        ];
+
+        return response()->json($response);
     }
 
 
-    public function destroy($id)
+    public function destroy($eventId)
     {
-        $evenement = Evenement::findOrFail($id);
+        $evenement = Evenement::findOrFail($eventId);
         $evenement->delete();
 
-        return redirect()->back();
+        $response = [
+            'destroyed' => true,
+            'message' => "L'événement à été suprimé avec succès"
+        ];
+
+        return response()->json($response);
     }
-    
 }

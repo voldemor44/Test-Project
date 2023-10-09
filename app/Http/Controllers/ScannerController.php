@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Models\EvenementScanner;
+use App\Models\Role;
 use App\Models\ScannerTickets;
 use App\Models\Ticket;
 use App\Models\Type;
@@ -14,18 +15,74 @@ use Illuminate\Support\Facades\Auth;
 class ScannerController extends Controller
 {
 
-    public function createAnScanner()
+    public function createAnScanner(Request $request)
     {
+        $user = User::create([
+            'nom' => $request->nom,
+            'prenoms' => $request->prenoms,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
+        $role = Role::where('nom', "Scanner")->first();
+        $user->roles()->attach($role);
+
+        $reponse = [
+            'scanner' => $user,
+            'message' => "Scanner créé avec succès"
+        ];
+
+        return response()->json($reponse);
     }
 
 
-    public function assign_scanner_to_event()
+    public function assign_scanner_to_event($event_id, $scanner_id)
     {
+        EvenementScanner::create([
+            'evenement_id' => $event_id,
+            'user_id' => $scanner_id
+        ]);
+
+        $event = Evenement::findOrFail($event_id);
+        $scanner = User::findOrFail($scanner_id);
+
+        $response = [
+            'event' => $event,
+            'scanner' => $scanner
+        ];
+
+        return response()->json($response);
     }
 
-    public function listEventofScanner()
+
+    public function toConnectScanner(Request $request)
     {
-        if (Auth::user()->roles->contains('nom', 'Scanner')) {
+
+        $email = $request->input("email");
+        $password = $request->input("password");
+
+        $nsc = User::where('email', $email)->where('password', $password)->count();
+
+        if ($nsc === 1) {
+            $scanner = User::where('email', $email)->where('password', $password)->first();
+
+            return response()->json([
+                'authentified' => true,
+                'scanner' => $scanner
+            ]);
+        } else {
+            return response()->json([
+                'authentified' => false
+            ]);
+        }
+    }
+
+    public function listEventofScanner(Request $request)
+    {
+        $scanner_id = $request->query("scanner_id");
+        $scanner = User::findOrFail($scanner_id);
+
+        if ($scanner->roles->contains('nom', 'Scanner')) {
 
             $events_scanner = EvenementScanner::where('user_id', Auth::user()->id)->get();
             $scanned_events = [];
@@ -35,75 +92,71 @@ class ScannerController extends Controller
                 array_push($scanned_events, $event);
             }
 
-            $json_scanned_events = json_encode($scanned_events);
-
-            return $json_scanned_events;
+            return response()->json($scanned_events);
         }
     }
 
-    public function statisticScannerPresent()
+    public function statisticScannerPresent(Request $request)
     {
-        if (Auth::user()->roles->contains('nom', 'Scanner')) {
+        $scanner_id = $request->query("scanner_id");
+        $scanner = User::findOrFail($scanner_id);
 
-            $nbr_scan_very_success = 0;
-            $nbr_scan_older = 0;
+        if ($scanner->roles->contains('nom', 'Scanner')) {
 
-            $scannerTickets = ScannerTickets::where('user_id', Auth::user()->id)->get();
+            $scanner_evenements = EvenementScanner::where('user_id', Auth::user()->id)->get();
 
-            foreach ($scannerTickets as $st) {
-                $ticket = Ticket::where('id', $st->ticket_id)->first();
-                $type_ticket = $ticket->type_id;
-                $event = $type_ticket->evenement_id;
-                if ($event->statut = "en cours") {
-                    if ($st->scan_success == true) {
-                        $nbr_scan_very_success++;
-                    } else {
-                        $nbr_scan_older++;
-                    }
+            foreach ($scanner_evenements as $scanner_evenement) {
+
+                $event = Evenement::where('id', $scanner_evenement->evenement_id)->first();
+
+                if ($event->statut == 'en cours') {
+
+                    $event_name = $event->nom;
+                    $nbrTicketforEvent = $event->nbr_places_prevu;
+                    $cse = $scanner_evenement;
+
+                    $nbr_ts = $cse->nbr_total_scan;
+                    $nbr_ss = $cse->nbr_success_scan;
+                    $nbr_fs = $cse->nbr_failed_scan;
                 }
             }
 
-            $response = [
-                'nbr_success' => $nbr_scan_very_success,
-                'nbr_echec' => $nbr_scan_older
+            $statistic_info = [
+                'event_name' => $event_name,
+                'event_nbr_ticket' => $nbrTicketforEvent,
+                'nbr_total_scan' => $nbr_ts,
+                'nbr_success_scan' => $nbr_ss,
+                'nbr_failed_scan' => $nbr_fs
             ];
 
-            return response()->json($response);
+            return response()->json($statistic_info);
         }
     }
 
 
-    public function statisticScannerOfPastEvent($event_id)
+    public function statisticScannerPastEvent(Request $request)
     {
-        if (Auth::user()->roles->contains('nom', 'Scanner')) {
+        $event_id = $request->query('event_id');
+        $scanner_id = $request->query('scanner_id');
+        $scanner = User::findOrFail($scanner_id);
 
-            $nbr_scan_very_success = 0;
-            $nbr_scan_older = 0;
+        if ($scanner->roles->contains('nom', 'Scanner')) {
 
-            $past_typeTicket = Type::where('evenement_id', $event_id)->get();
+            $pse = EvenementScanner::where('user_id', Auth::user()->id)
+                ->where('evenement_id', $event_id)
+                ->first();
 
-            foreach ($past_typeTicket as $ptt) {
+            $nbr_ts = $pse->nbr_total_scan;
+            $nbr_ss = $pse->nbr_success_scan;
+            $nbr_fs = $pse->nbr_failed_scan;
 
-                // tous les tickets de cet événements passés ayant ce type
-                $past_event_tickets = Ticket::where('type_id', $ptt->id)->get();
-
-                foreach ($past_event_tickets as $pet) {
-                    $scannerTicket = ScannerTickets::where('user_id', Auth::user()->id)->where('ticket_id', $pet->id)->get();
-
-                    if ($scannerTicket->scan_success == true) {
-                        $nbr_scan_very_success++;
-                    } else {
-                        $nbr_scan_older++;
-                    }
-                }
-            }
-
-            $response = [
-                'nbr_success' => $nbr_scan_very_success,
-                'nbr_echec' => $nbr_scan_older
+            $statistic = [
+                'nbr_total_scan' => $nbr_ts,
+                'nbr_success_scan' => $nbr_ss,
+                'nbr_failed_scan' => $nbr_fs
             ];
 
-            return response()->json($response);
+            return response()->json($statistic);
         }
     }
 }
