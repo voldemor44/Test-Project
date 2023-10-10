@@ -17,10 +17,11 @@ class EvenementController extends Controller
         return response()->json($all_events);
     }
 
+    // supposé json fait
     public function store(Request $request)
     {
 
-        $request->validate([
+        /*  $request->validate([
             'nom' => 'required|min:3',
             'genre' => 'required',
             'description'   => 'required',
@@ -29,18 +30,19 @@ class EvenementController extends Controller
             'nbr_p' => 'required',
             'contacts' => 'required',
             'logo_url' => 'required',
-        ]);
+        ]);*/
 
+        $requestJson = $request->json()->all();
 
         $evenement = Evenement::create([
-            'genre_id' => $request->genre,
-            'nom' => $request->nom,
-            'description' => $request->description,
-            'date_heure' => $request->date_heure,
-            'adresse' => $request->adresse,
-            'contacts' => $request->contacts,
-            'logo_url' => $request->logo_url,
-            'nbr_places_prevu' => $request->nbr_p
+            'genre_id' => $requestJson["genre"],
+            'nom' => $requestJson["nom"],
+            'description' => $requestJson["description"],
+            'date_heure' => $requestJson["date_heure"],
+            'adresse' => $requestJson["adresse"],
+            'contacts' => $requestJson["contacts"],
+            'logo_url' => $requestJson["logo_url"],
+            'nbr_places_prevu' => $requestJson["nbr_places"]
         ]);
 
         $response = [
@@ -53,9 +55,13 @@ class EvenementController extends Controller
     }
 
 
-    public function showEvent($eventId)
+    // supposé json fait
+    public function showEvent(Request $request)
     {
-        $event = Evenement::findOrFail($eventId);
+        $requestJson = $request->json()->all();
+        $event_id = $requestJson["event_id"];
+
+        $event = Evenement::findOrFail($event_id);
         $typeTicket_event = Type::where('evenement_id', $event->id)->get();
 
         $response = [
@@ -66,19 +72,23 @@ class EvenementController extends Controller
     }
 
 
-    public function update($eventId, Request $request)
+    // supposé json fait
+    public function update(Request $request)
     {
-        $evenement = Evenement::findOrFail($eventId);
+
+        $requestJson = $request->json()->all();
+        $event_id = $requestJson["event_id"];
+        $evenement = Evenement::findOrFail($event_id);
 
         // Récupération des données envoyées depuis le formulaire
-        $genre_id = $request->genre;
-        $nom = $request->nom;
-        $description = $request->description;
-        $date_heure = $request->date_heure;
-        $adresse = $request->adresse;
-        $contacts = $request->contacts;
-        $logo_url = $request->logo_url;
-        $nbr_places_prevu = $request->nbr_p;
+        $genre_id = $requestJson["genre"];
+        $nom = $requestJson["nom"];
+        $description = $requestJson["description"];
+        $date_heure = $requestJson["date_heure"];
+        $adresse = $requestJson["adresse"];
+        $contacts = $requestJson["contacts"];
+        $logo_url = $requestJson["logo_url"];
+        $nbr_places_prevu = $requestJson["nbr_places"];
 
         if ($genre_id !== null && $genre_id !== $evenement->genre_id) {
             $evenement->update([

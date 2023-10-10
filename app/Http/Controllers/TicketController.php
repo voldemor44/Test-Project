@@ -2,48 +2,93 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Evenement;
-use App\Models\EvenementScanner;
-use App\Models\ScannerTickets;
-use App\Models\Ticket;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Ticket;
 use Nette\Utils\Random;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Evenement;
+use Illuminate\Http\Request;
+use App\Models\ScannerTickets;
+use App\Models\EvenementScanner;
+use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TicketController extends Controller
 {
 
-    public function buyTicket($typeTicket_id)
+    // json fait
+    public function buyTicket(Request $request)
     {
-        $ticket = Ticket::create([
-            'user_id' => Auth::user()->id,
-            'type_id' => $typeTicket_id,
-            'code' => Random::generate(),
-            'isUsed' => false
-        ]);
 
-        $user = User::findOrFail(Auth::user()->id);
-        $nta = $user->achat_tickets_nbr;
+        $requestJson = $request->json()->all();
+        $nbr_type = count($requestJson);
+        $nbr_tt = 0;
+        $somme_totat_achat = 0;
 
-        $user->update([
-            'achat_tickets_nbr' => $nta + 1
-        ]);
+        $all_tickets_infos = [];
 
-        $event = $ticket->type()->evenement();
-        $nta2 = $event->nbr_tickets_achat;
+        for ($i = 0; $i < $nbr_type; $i++) {
 
-        $event->update([
-            'nbr_tickets_achat' => $nta2 + 1
-        ]);
+            if ($requestJson[$i]["nbr_ticket"] > 0) {
 
-        $type = $ticket->type();
+                $nbr_tt = $nbr_tt + $requestJson[$i]["nbr_ticket"];
+
+                $nbr_tickets = $requestJson[$i]["nbr_ticket"];
+                for ($j = 0; $j < $nbr_tickets; $j++) {
+
+                    $ticket = Ticket::create([
+                        'user_id' => $requestJson[$i]["user_id"],
+                        'type_id' => $requestJson[$i]["type_id"],
+                        'code' => Random::generate(),
+                        'isUsed' => false
+                    ]);
+                    $user = User::findOrFail($requestJson[$i]["user_id"]);
+                    $nta = $user->achat_tickets_nbr;
+
+                    $user->update([
+                        'achat_tickets_nbr' => $nta + 1
+                    ]);
+
+                    $type = $ticket->type;
+
+                    $somme_totat_achat = $somme_totat_achat + $type->prix;
+
+                    $event = $type->evenement;
+                    $nta2 = $event->nbr_tickets_achat;
+
+                    $event->update([
+                        'nbr_tickets_achat' => $nta2 + 1
+                    ]);
+
+                    // génération du code QR
+                    $code = $ticket->code;
+                    $qrCode = QrCode::size(300)->generate($code);
+
+                    $infos_ticket = [
+                        "nom_evenement" => $event->nom,
+                        "type_tiket" => $type->nom,
+                        "prix_ticket" => $type->prix,
+                        "codeQR" => $qrCode
+                    ];
+
+                    array_push($all_tickets_infos, $infos_ticket);
+                }
+            }
+        }
+
+        // génération du pdf quitance contenant les infos et les codes QR du ou des ticket(s)
+
+       $pdf = Pdf::loadView('quitance', $all_tickets_infos);
+
+
+
+        // envoie du pdf à l'email
+
         $response = [
-            'event' => $event,
-            'ticket' => $ticket,
-            'type' => $type,
-            'created' => true,
-            'message' => "ticket créer avec succès"
+            'nbr_total_ticket_achat' =>  $nbr_tt,
+            'somme_total_achat' => $somme_totat_achat,
+            'infos_quitance' => $all_tickets_infos,
+            'message' => "Achat(s) éfectué(s)"
         ];
 
         return response()->json($response);
@@ -51,8 +96,9 @@ class TicketController extends Controller
 
     public function scanTicket(Request $request)
     {
-        $code = $request->query("code");
-        $scanner_id = $request->query("scanner_id");
+        $requestJson = $request->json()->all();
+        $code = $requestJson["code"];
+        $scanner_id = $requestJson["scanner_id"];
 
         $scanner_evenements = EvenementScanner::where('user_id', $scanner_id)->get();
 
@@ -73,9 +119,11 @@ class TicketController extends Controller
         if (Ticket::where('code', $code)->count() == 1) {
 
             $ticket = Ticket::where('code', $code)->first();
+            $type = $ticket->type;
+            $evenement = $type->evenement;
 
             // verifier si ce ticket est bel et bien lié à l'évènement en cours
-            if ($ticket->type()->evenement()->id === $scanCurrentEvent->id) {
+            if ($evenement->id === $scanCurrentEvent->id) {
 
                 // verifier si le ticket n'a pas déjà été utilisé
                 if (!$ticket->isUsed) {
@@ -96,7 +144,7 @@ class TicketController extends Controller
 
                     // code peut pertinent
                     ScannerTickets::create([
-                        'user_id' => Auth::user()->id,
+                        'user_id' => $scanner_id,
                         'ticket_id' => $ticket->id,
                         'scan_success' => true,
                     ]);
@@ -116,7 +164,7 @@ class TicketController extends Controller
 
                     // code peut pertinent                                          
                     ScannerTickets::create([
-                        'user_id' => Auth::user()->id,
+                        'user_id' => $scanner_id,
                         'ticket_id' => $ticket->id,
                         'scan_success' => false,
                     ]);

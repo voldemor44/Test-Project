@@ -25,20 +25,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/event/allList', [EvenementController::class, 'allEeventlist']);
 
-Route::get('/event/show/{eventId}', [EvenementController::class, 'showEvent']);
+Route::get('/event/show/', [EvenementController::class, 'showEvent']);
 
 Route::post('/event/ajout', [EvenementController::class, 'store']);
 
-Route::post('/event/update/{eventId}', [EvenementController::class, 'update']);
+Route::post('/event/update/', [EvenementController::class, 'update']);
 
 Route::post('/event/type_ticket/ajout', [TypeController::class, 'create_TypeticketEvent']);
-Route::post('/event/type_ticket/update/{id}', [TypeController::class, 'update_type']);
+Route::post('/event/type_ticket/update/', [TypeController::class, 'update_type']);
 
 
-Route::post('/event/byTicket',[TicketController::class, 'buyTicket']);
-Route::get('/event/scan-ticket',[TicketController::class, 'scanTicket']);
+Route::post('/event/buyTickets', [TicketController::class, 'buyTicket']);
+Route::get('/event/scanner/scan-ticket', [TicketController::class, 'scanTicket']);
 Route::post('/event/scanner/connection', [ScannerController::class, 'toConnectScanner']);
 
 Route::get('/event/scanner/present_statistique', [ScannerController::class, 'statisticScannerPresent']);
 Route::get('/event/all/scanner', [ScannerController::class, 'listEventofScanner']);
-Route::get('/event/past/scanner/statistique', [ScannerController::class, 'listEventofScanner']);
+Route::get('/event/past/scanner/statistique', [ScannerController::class, 'statisticScannerPastEvent']);
+Route::get('/event/scanner/deconnection', [ScannerController::class, 'toDeconnectScanner']);
+
+Route::post('/create-scanner', [ScannerController::class, 'createAnScanner']);
+
+Route::post('/event/assign-scanner', [ScannerController::class, 'assign_scanner_to_event']);
+
+Route::post('/scanner/modify-profil', [ScannerController::class, 'modifyProfilScanner']);
+
+Route::post('/scanner/modify-password', [ScannerController::class, 'modifyScannerPassword']);
