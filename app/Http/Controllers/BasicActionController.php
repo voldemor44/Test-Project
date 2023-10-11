@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailToInscription;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Token;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BasicActionController extends Controller
 {
@@ -25,7 +27,7 @@ class BasicActionController extends Controller
             'nom' => $nom,
             'prenoms' => $prenoms,
             'email' => $email,
-            'tel' => $tel,
+            'telephone' => $tel,
             'genre_id' => $genre_id,
             'password' => $password,
         ]);
@@ -43,6 +45,14 @@ class BasicActionController extends Controller
             "user" => $user,
             "token" => $token->string
         ];
+
+        $data = [
+            "username" => $user->nom . $user->prenoms,
+            "link" => "www.site.com",
+            "token" => $token->string
+        ];
+
+        Mail::to($user->email)->send(new MailToInscription($data));
 
         return response()->json($response);
     }

@@ -78,13 +78,16 @@ class ScannerController extends Controller
         $new_photo = $requestJson["nouvelle_photo"];
 
         if (isset($new_photo) && !empty($new_photo)) {
-            $imageData = base64_decode($new_photo);
-            $imageName = time() . ".png";
 
-            file_put_contents(public_path('images/' . $imageName), $imageData);
+            $filename = time() . '.' . $new_photo->extension();
+            $path = $new_photo->storeAs('images', $filename, 'public');
+
+            $scanner->update([
+                'photo_profil' => $path
+            ]);
         }
         // fin en cours
-        
+
         if ($requestJson["nouveau_nom"] !== null && $scanner->nom !== $requestJson["nouveau_nom"]) {
             $new_nom = $requestJson["nouveau_nom"];
 
@@ -110,38 +113,60 @@ class ScannerController extends Controller
         }
 
 
-        return response()->json($scanner);
+        return response()->json([
+            "scanner" => $scanner
+        ]);
     }
 
     // json fait
     public function modifyScannerPassword(Request $request)
     {
         $requestJson = $request->json()->all();
-        $scanner_id = $requestJson["scanner_id"];
+        $scanner_email = $requestJson["email"];
         $new_password = $requestJson["new_password"];
 
-        $scanner = User::findOrFail($scanner_id);
+        $nc = User::where('email', $scanner_email)->count();
+        if ($nc === 1) {
+            $scanner = User::where('email', $scanner_email)->first();
+            $roles = $scanner->roles;
 
-        if ($new_password !== null && $new_password !== $scanner->password) {
+            if ($roles->contains('nom', "Scanner")) {
+                if ($new_password !== null && $new_password !== $scanner->password) {
 
-            $scanner->update([
-                'password' => $new_password
-            ]);
+                    $scanner->update([
+                        'password' => $new_password
+                    ]);
 
-            $response = [
-                "modified" => true,
-                "new_password" => $new_password
-            ];
+                    $response = [
+                        "modified" => true,
+                        "new_password" => $new_password
+                    ];
 
-            return response()->json($response);
+                    return response()->json($response);
+                } else {
+
+                    $response = [
+                        "modified" => false,
+                        "error" => "mdp invalide"
+                    ];
+
+                    return response()->json($response);
+                }
+            } else {
+                return response()->json(
+                    [
+                        "modified" => false,
+                        "message" => "Vous n'êtes pas un scanner "
+                    ]
+                );
+            }
         } else {
-
-            $response = [
-                "modified" => false,
-                "error" => "Champ non rempli"
-            ];
-
-            return response()->json($response);
+            return response()->json(
+                [
+                    "modified" => false,
+                    "message" => "Cet email n'existe pas dans la base de données "
+                ]
+            );
         }
     }
 

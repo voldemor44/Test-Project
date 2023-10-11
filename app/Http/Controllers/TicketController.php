@@ -83,6 +83,7 @@ class TicketController extends Controller
         $user_id = $requestJson[0]["user_id"];
         $user = User::findOrFail($user_id);
 
+        view('quitance', compact('all_tickets_infos'));
         $pdf = Pdf::loadView('quitance', $all_tickets_infos);
 
         Mail::send('quitance', $all_tickets_infos, function ($message) use ($all_tickets_infos, $pdf) {
@@ -93,7 +94,7 @@ class TicketController extends Controller
             $message->to($user->email)
                 ->subject("Achat de ticket sur EventShop")
                 ->attachData($pdf->output(), "quitance-tickets.pdf");
-        }); 
+        });
 
         // envoie du pdf à l'email
 
@@ -107,6 +108,7 @@ class TicketController extends Controller
         return response()->json($response);
     }
 
+    // json fait
     public function scanTicket(Request $request)
     {
         $requestJson = $request->json()->all();
