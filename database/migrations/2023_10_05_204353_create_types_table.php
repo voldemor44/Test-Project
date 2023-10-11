@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nom');
             $table->text('privileges')->nullable();
             $table->integer('prix');
+            $table->integer('nbr_dispo');
             $table->timestamps();
         });
     }

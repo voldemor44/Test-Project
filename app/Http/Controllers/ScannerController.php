@@ -74,6 +74,17 @@ class ScannerController extends Controller
 
         $scanner = User::findOrFail($scanner_id);
 
+        // en cours
+        $new_photo = $requestJson["nouvelle_photo"];
+
+        if (isset($new_photo) && !empty($new_photo)) {
+            $imageData = base64_decode($new_photo);
+            $imageName = time() . ".png";
+
+            file_put_contents(public_path('images/' . $imageName), $imageData);
+        }
+        // fin en cours
+        
         if ($requestJson["nouveau_nom"] !== null && $scanner->nom !== $requestJson["nouveau_nom"]) {
             $new_nom = $requestJson["nouveau_nom"];
 

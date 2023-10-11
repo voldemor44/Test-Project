@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('genre')->nullable();
             $table->string('email')->unique();
             $table->string('telephone')->nullable();
+            $table->string('photo_profil')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->unique();
             $table->integer('achat_tickets_nbr')->nullable()->default(0);

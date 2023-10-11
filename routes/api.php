@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasicActionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvenementController;
@@ -51,3 +52,7 @@ Route::post('/event/assign-scanner', [ScannerController::class, 'assign_scanner_
 Route::post('/scanner/modify-profil', [ScannerController::class, 'modifyProfilScanner']);
 
 Route::post('/scanner/modify-password', [ScannerController::class, 'modifyScannerPassword']);
+
+Route::post('/participant/inscription', [BasicActionController::class, 'inscription']);
+
+Route::post('/connection', [BasicActionController::class, 'connectUserOrAdmin']);

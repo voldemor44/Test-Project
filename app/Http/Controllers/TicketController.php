@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Ticket;
 use Nette\Utils\Random;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use App\Models\ScannerTickets;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\EvenementScanner;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TicketController extends Controller
@@ -68,7 +69,8 @@ class TicketController extends Controller
                         "nom_evenement" => $event->nom,
                         "type_tiket" => $type->nom,
                         "prix_ticket" => $type->prix,
-                        "codeQR" => $qrCode
+                        "codeQR" => $qrCode,
+                        "userID" => $requestJson[$i]["user_id"]
                     ];
 
                     array_push($all_tickets_infos, $infos_ticket);
@@ -78,9 +80,20 @@ class TicketController extends Controller
 
         // génération du pdf quitance contenant les infos et les codes QR du ou des ticket(s)
 
-       $pdf = Pdf::loadView('quitance', $all_tickets_infos);
+        $user_id = $requestJson[0]["user_id"];
+        $user = User::findOrFail($user_id);
 
+        $pdf = Pdf::loadView('quitance', $all_tickets_infos);
 
+        Mail::send('quitance', $all_tickets_infos, function ($message) use ($all_tickets_infos, $pdf) {
+
+            $user_id = $all_tickets_infos[0]["userID"];
+            $user = User::findOrFail($user_id);
+
+            $message->to($user->email)
+                ->subject("Achat de ticket sur EventShop")
+                ->attachData($pdf->output(), "quitance-tickets.pdf");
+        }); 
 
         // envoie du pdf à l'email
 
