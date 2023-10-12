@@ -74,7 +74,7 @@ class ScannerController extends Controller
 
         $scanner = User::findOrFail($scanner_id);
 
-        // en cours
+        // en cours ( à revoir )
         $new_photo = $requestJson["nouvelle_photo"];
 
         if (isset($new_photo) && !empty($new_photo)) {

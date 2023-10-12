@@ -49,9 +49,9 @@ Route::post('/create-scanner', [ScannerController::class, 'createAnScanner']);
 
 Route::post('/event/assign-scanner', [ScannerController::class, 'assign_scanner_to_event']);
 
-Route::post('/scanner/modify-profil', [ScannerController::class, 'modifyProfilScanner']);
+Route::post('/event/scanner/modify-profil', [ScannerController::class, 'modifyProfilScanner']);
 
-Route::post('/scanner/modify-password', [ScannerController::class, 'modifyScannerPassword']);
+Route::post('/event/scanner/modify-password', [ScannerController::class, 'modifyScannerPassword']);
 
 Route::post('/participant/inscription', [BasicActionController::class, 'inscription']);
 

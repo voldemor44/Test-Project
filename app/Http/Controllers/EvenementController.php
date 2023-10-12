@@ -32,7 +32,12 @@ class EvenementController extends Controller
             'logo_url' => 'required',
         ]);*/
 
+        // à revoir
         $requestJson = $request->json()->all();
+
+        $logo = $requestJson["logo"];
+        $filename = time() . '.' . $logo->extension();
+        $path = $logo->storeAs('images', $filename, 'public');
 
         $evenement = Evenement::create([
             'genre_id' => $requestJson["genre"],
@@ -41,7 +46,7 @@ class EvenementController extends Controller
             'date_heure' => $requestJson["date_heure"],
             'adresse' => $requestJson["adresse"],
             'contacts' => $requestJson["contacts"],
-            'logo_url' => $requestJson["logo_url"],
+            'logo_url' => $path,
             'nbr_places_prevu' => $requestJson["nbr_places"]
         ]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ToQuitance;
 use App\Models\User;
 use App\Models\Ticket;
 use Nette\Utils\Random;
@@ -26,6 +27,7 @@ class TicketController extends Controller
         $nbr_tt = 0;
         $somme_totat_achat = 0;
 
+
         $all_tickets_infos = [];
 
         for ($i = 0; $i < $nbr_type; $i++) {
@@ -37,10 +39,11 @@ class TicketController extends Controller
                 $nbr_tickets = $requestJson[$i]["nbr_ticket"];
                 for ($j = 0; $j < $nbr_tickets; $j++) {
 
+                    $the_code = Random::generate();
                     $ticket = Ticket::create([
                         'user_id' => $requestJson[$i]["user_id"],
                         'type_id' => $requestJson[$i]["type_id"],
-                        'code' => Random::generate(),
+                        'code' => $the_code,
                         'isUsed' => false
                     ]);
                     $user = User::findOrFail($requestJson[$i]["user_id"]);
@@ -69,7 +72,7 @@ class TicketController extends Controller
                         "nom_evenement" => $event->nom,
                         "type_tiket" => $type->nom,
                         "prix_ticket" => $type->prix,
-                        "codeQR" => $qrCode,
+                        "code" => $the_code,
                         "userID" => $requestJson[$i]["user_id"]
                     ];
 
@@ -83,10 +86,12 @@ class TicketController extends Controller
         $user_id = $requestJson[0]["user_id"];
         $user = User::findOrFail($user_id);
 
-        view('quitance', compact('all_tickets_infos'));
-        $pdf = Pdf::loadView('quitance', $all_tickets_infos);
+        //$pdf = Pdf::loadView('quitance', $all_tickets_infos);
+        // $pdf->save(public_path('/quitance.pdf'));
 
-        Mail::send('quitance', $all_tickets_infos, function ($message) use ($all_tickets_infos, $pdf) {
+        Mail::to($user->email)->send(new ToQuitance($all_tickets_infos));
+
+        /* Mail::send('quitance', $all_tickets_infos, function ($message) use ($all_tickets_infos, $pdf) {
 
             $user_id = $all_tickets_infos[0]["userID"];
             $user = User::findOrFail($user_id);
@@ -94,7 +99,7 @@ class TicketController extends Controller
             $message->to($user->email)
                 ->subject("Achat de ticket sur EventShop")
                 ->attachData($pdf->output(), "quitance-tickets.pdf");
-        });
+        }); */
 
         // envoie du pdf à l'email
 
