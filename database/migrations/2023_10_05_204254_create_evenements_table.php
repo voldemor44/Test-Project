@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('logo_url')->nullable();
             $table->integer('nbr_places_prevu');
             $table->integer('nbr_tickets_achat')->nullable();
+            $table->integer('nbr_tickets_restant')->nullable();
             $table->string('statut')->default('à venir');
             $table->timestamps();
         });

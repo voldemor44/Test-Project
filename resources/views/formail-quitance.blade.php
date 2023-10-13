@@ -27,7 +27,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
             <p><b>Type du ticket : </b> {{ $infos_ticket['type_tiket'] }}</p>
             <p><b>Prix du type : </b> {{ $infos_ticket['prix_ticket'] }}</p>
 
-            <h5>Code QR du ticket</h5>
+            <h5>Code QR du ticket : </h5>
 
             <div>
                 <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->generate($infos_ticket['code'])) }}"

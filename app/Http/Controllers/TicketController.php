@@ -54,14 +54,21 @@ class TicketController extends Controller
                     ]);
 
                     $type = $ticket->type;
+                    $nb_dispo = $type->nbr_dispo;
+
+                    $type->update([
+                        'nbr_dispo' => $nb_dispo - 1
+                    ]);
 
                     $somme_totat_achat = $somme_totat_achat + $type->prix;
 
                     $event = $type->evenement;
                     $nta2 = $event->nbr_tickets_achat;
+                    $nta3 = $event->nbr_tickets_restant;
 
                     $event->update([
-                        'nbr_tickets_achat' => $nta2 + 1
+                        'nbr_tickets_achat' => $nta2 + 1,
+                        'nbr_tickets_restant' => $nta3 - 1
                     ]);
 
                     // génération du code QR

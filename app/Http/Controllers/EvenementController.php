@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class EvenementController extends Controller
 {
 
+    // json fait
     public function allEeventlist()
     {
 
@@ -17,7 +18,7 @@ class EvenementController extends Controller
         return response()->json($all_events);
     }
 
-    // supposé json fait
+    // json fait
     public function store(Request $request)
     {
 
@@ -34,10 +35,10 @@ class EvenementController extends Controller
 
         // à revoir
         $requestJson = $request->json()->all();
-
-        $logo = $requestJson["logo"];
-        $filename = time() . '.' . $logo->extension();
-        $path = $logo->storeAs('images', $filename, 'public');
+       
+       // $logo = $requestJson["logo"];
+       // $filename = time() . '.' . $logo->extension();
+       // $path = $logo->storeAs('images', $filename, 'public');
 
         $evenement = Evenement::create([
             'genre_id' => $requestJson["genre"],
@@ -46,8 +47,9 @@ class EvenementController extends Controller
             'date_heure' => $requestJson["date_heure"],
             'adresse' => $requestJson["adresse"],
             'contacts' => $requestJson["contacts"],
-            'logo_url' => $path,
-            'nbr_places_prevu' => $requestJson["nbr_places"]
+            'logo_url' => $requestJson["logo_url"],
+            'nbr_places_prevu' => $requestJson["nbr_places"],
+            'nbr_tickets_restant' => $requestJson["nbr_places"]
         ]);
 
         $response = [
@@ -60,7 +62,7 @@ class EvenementController extends Controller
     }
 
 
-    // supposé json fait
+    // json fait
     public function showEvent(Request $request)
     {
         $requestJson = $request->json()->all();
@@ -77,7 +79,7 @@ class EvenementController extends Controller
     }
 
 
-    // supposé json fait
+    // json fait
     public function update(Request $request)
     {
 

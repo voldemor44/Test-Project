@@ -16,6 +16,7 @@ class EvenementSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 4; $i++) {
+            $nm = rand(40, 300);
             DB::table('evenements')->insert([
                 [
                     'genre_id' => $i,
@@ -23,7 +24,8 @@ class EvenementSeeder extends Seeder
                     'description' => fake()->text(),
                     'adresse' => fake()->address,
                     'date_heure' => fake()->date(),
-                    'nbr_places_prevu' => rand(40, 300),
+                    'nbr_places_prevu' => $nm,
+                    'nbr_tickets_restant' => $nm,
                     'created_at' => now(),
                     'updated_at' => now()
                 ],

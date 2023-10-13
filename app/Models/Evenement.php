@@ -21,6 +21,7 @@ class Evenement extends Model
         'nbr_places_prevu',
         'statut',
         'nbr_tickets_achat',
+        'nbr_tickets_restant',
         'created_at',
         'updated_at',
     ];

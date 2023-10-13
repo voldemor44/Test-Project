@@ -52,12 +52,12 @@ class BasicActionController extends Controller
             "token" => $token->string
         ];
 
-        Mail::to($user->email)->send(new MailToInscription($data));
+        // Mail::to($user->email)->send(new MailToInscription($data));
 
         return response()->json($response);
     }
 
-    // supposé jscon fait
+    //json fait
     public function connectUserOrAdmin(Request $request)
     {
         $requestJson = $request->json()->all();

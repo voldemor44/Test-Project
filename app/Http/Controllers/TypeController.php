@@ -10,16 +10,19 @@ class TypeController extends Controller
 {
 
 
-    // supposé json fait
+    // json fait
     public function create_TypeticketEvent(Request $request)
     {
         $requestJson = $request->json()->all();
         // $id contient l'id de l'événement auquel on compte créer un type de ticket
+        $nbr_dispo = $requestJson["nbr_dispo"];
+
         $type = Type::create([
             'evenement_id' => $requestJson["event_id"],
             'nom' => $requestJson["nom"],
             'privileges' => $requestJson["privileges"],
-            'prix' => $requestJson["prix"]
+            'prix' => $requestJson["prix"],
+            'nbr_dispo' => $nbr_dispo
         ]);
 
         $response = [
@@ -66,7 +69,7 @@ class TypeController extends Controller
         }
 
         $response = [
-            'created' => true,
+            'updated' => true,
             'type' => $typeEvent,
             'message' => "Type de ticket créé avec succès"
         ];

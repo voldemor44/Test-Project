@@ -13,8 +13,9 @@ class Type extends Model
         'id',
         'evenement_id',
         'nom',
-        'privileges ',
+        'privileges',
         'prix',
+        'nbr_dispo',
         'created_at',
         'updated_at'
     ];

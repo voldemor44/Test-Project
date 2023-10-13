@@ -26,14 +26,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/event/allList', [EvenementController::class, 'allEeventlist']);
 
-Route::get('/event/show/', [EvenementController::class, 'showEvent']);
+Route::get('/event/show', [EvenementController::class, 'showEvent']);
 
 Route::post('/event/ajout', [EvenementController::class, 'store']);
 
-Route::post('/event/update/', [EvenementController::class, 'update']);
+Route::post('/event/update', [EvenementController::class, 'update']);
 
 Route::post('/event/type_ticket/ajout', [TypeController::class, 'create_TypeticketEvent']);
-Route::post('/event/type_ticket/update/', [TypeController::class, 'update_type']);
+Route::post('/event/type_ticket/update', [TypeController::class, 'update_type']);
 
 
 Route::post('/event/buyTickets', [TicketController::class, 'buyTicket']);
