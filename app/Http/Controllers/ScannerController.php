@@ -147,7 +147,7 @@ class ScannerController extends Controller
 
                     $response = [
                         "modified" => false,
-                        "error" => "mdp invalide"
+                        "message" => "mot de passe invalide"
                     ];
 
                     return response()->json($response);
@@ -193,9 +193,20 @@ class ScannerController extends Controller
                     'string' => \Illuminate\Support\Str::random(60)
                 ]);
 
+                $infos_scanner = [
+                    "id" => $scanner->id,
+                    "nom" => $scanner->nom,
+                    "prenoms" => $scanner->prenoms,
+                    "genre" => $scanner->genre,
+                    "email" => $scanner->email,
+                    "telephone" => $scanner->telephone,
+                    "achat_tickets_nbr" => $scanner->achat_tickets_nbr,
+                    "nbr_event_scan" => $scanner->achat_tickets_nbr
+                ];
+
                 return response()->json([
                     'authentified' => true,
-                    'scanner' => $scanner,
+                    'scanner_infos' => $infos_scanner,
                     'token' => $token->string
                 ]);
             } else {
@@ -205,10 +216,20 @@ class ScannerController extends Controller
                 ]);
             }
         } else {
-            return response()->json([
-                'authentified' => false,
-                'message' => "Vous n'êtes pas dans la base de donnée"
-            ]);
+            $trueEmail = User::where('email', $email)->count();
+            $truePassword = User::where('password', $password)->count();
+
+            if ($trueEmail === 1 ||  $truePassword === 1) {
+                return response()->json([
+                    'authentified' => false,
+                    'message' => "Email ou mot de passe incorrect"
+                ]);
+            } else {
+                return response()->json([
+                    'authentified' => false,
+                    'message' => "Vous n'êtes pas dans la base de donnée"
+                ]);
+            }
         }
     }
 

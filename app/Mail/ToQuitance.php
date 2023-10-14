@@ -20,11 +20,11 @@ class ToQuitance extends Mailable
      */
 
 
-    public $all_tickets_infos;
+   
 
-    public function __construct(array $all_tickets_infos)
+    public function __construct()
     {
-        $this->all_tickets_infos = $all_tickets_infos;
+    
     }
 
     /**
@@ -35,7 +35,7 @@ class ToQuitance extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'To Quitance',
+            subject: 'Quitance d\'achat des tickets',
         );
     }
 

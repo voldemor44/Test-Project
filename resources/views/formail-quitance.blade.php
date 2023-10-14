@@ -1,7 +1,3 @@
-<?php
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,29 +9,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 </head>
 
 <body>
-    <h3>Quitance d'achat de tickets</h3>
-    @php
-        $n = 0;
-    @endphp
-    @foreach ($all_tickets_infos as $infos_ticket)
-        @php
-            $n++;
-        @endphp
-        <div>
-            <h4>ticket n° {{ $n }}</h4>
-            <p><b>Nom de l'événement : </b> {{ $infos_ticket['nom_evenement'] }}</p>
-            <p><b>Type du ticket : </b> {{ $infos_ticket['type_tiket'] }}</p>
-            <p><b>Prix du type : </b> {{ $infos_ticket['prix_ticket'] }}</p>
-
-            <h5>Code QR du ticket : </h5>
-
-            <div>
-                <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->generate($infos_ticket['code'])) }}"
-                    alt="">
-            </div>
-        </div>
-    @endforeach
-
+    <h4>Merci d'avoir acheter vos tickets sur EventShop</h4>
+    <b>Les quitances de vos tickets sont présents dans le pdf ci dessous joint.</b>
 </body>
 
 </html>

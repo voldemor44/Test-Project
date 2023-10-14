@@ -73,13 +73,15 @@ class TicketController extends Controller
 
                     // génération du code QR
                     $code = $ticket->code;
-                    $qrCode = QrCode::size(300)->generate($code);
+                    $qrCode = QrCode::format('png')->size(300)->generate($code);
+
+
 
                     $infos_ticket = [
                         "nom_evenement" => $event->nom,
                         "type_tiket" => $type->nom,
                         "prix_ticket" => $type->prix,
-                        "code" => $the_code,
+                        "code_qr" => $qrCode,
                         "userID" => $requestJson[$i]["user_id"]
                     ];
 
@@ -93,10 +95,17 @@ class TicketController extends Controller
         $user_id = $requestJson[0]["user_id"];
         $user = User::findOrFail($user_id);
 
-        //$pdf = Pdf::loadView('quitance', $all_tickets_infos);
-        // $pdf->save(public_path('/quitance.pdf'));
+        Pdf::setOption(
+            [
+                "defaultFont" => "Courier",
+                "defaultPaperSize" => "a4",
+                "dpi" => 130
+            ]
+        );
 
-        Mail::to($user->email)->send(new ToQuitance($all_tickets_infos));
+        $pdf = Pdf::loadView('quitance', compact($all_tickets_infos));
+
+        Mail::to($user->email)->send(new ToQuitance());
 
         /* Mail::send('quitance', $all_tickets_infos, function ($message) use ($all_tickets_infos, $pdf) {
 

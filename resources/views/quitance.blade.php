@@ -26,7 +26,7 @@
             <h5>Code QR du ticket</h5>
 
             <div>
-                {{ $infos_ticket['codeQR'] }}
+                {{ $infos_ticket['code_qr'] }}
             </div>
         </div>
     @endforeach
